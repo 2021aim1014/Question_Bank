@@ -1,0 +1,6 @@
+$(document).ready(function(){
+// initially display subjective block
+$('.objective_multiple').hide();
+$('.objective_single').hide();
+$("[name='subjective_answer']").attr("required", true);
+});

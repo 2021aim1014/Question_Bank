@@ -1,0 +1,12 @@
+function editQuestion(qid){
+  if(confirm("Do you want to edit?")){
+    document.cookie = "qid="+qid;
+    window.location.href = "updateQuestion.php";
+  }
+}
+function deleteQuestion(qid){
+  if(confirm("Do you want to delete?")){
+    document.cookie = "qid="+qid;
+    window.location.href = "deleteQuestion.php";
+  }
+}

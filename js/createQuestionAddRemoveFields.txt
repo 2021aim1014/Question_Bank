@@ -1,0 +1,63 @@
+
+$(document).ready(function(){
+  // Function to add new input and option field for objective single answer
+  var MaxField = 6;
+  var x = 0;
+  var y = 0;
+  var singleOptionAddButton = $('.objective_single_add_button');
+  var single_option_input_wrapper = $('.objective_single_option_wrapper');
+
+  $(singleOptionAddButton).click(function(){
+    var x = 0;
+    $('.objSingleOption').each(function(){
+      x += 1;
+    });
+    if(x < MaxField){
+      x++;
+      var single_option_input = '<div class="radio"><input type="radio" name="type_option" value="'+x+'"><input type="text" class="objective_single_option objSingleOption form-check-inline"  name="objective_single_option_values[]" required/><a href="javascript:void(0);" class="objective_single_remove_button form-check-inline" title="remove fields">-</a></div>';
+      $(single_option_input_wrapper).append(single_option_input);
+    }else {
+      alert("maximum of 6 options can be given");
+    }
+  });
+
+  $("#questionForm").on('click', '.objective_single_remove_button', function(e){
+      e.preventDefault();
+      $(this).parent('div').remove(); //Remove field html
+  });
+
+
+  // Function to add new input and option field for objective multiple answer
+  var multipleOptionAddButton = $('.objective_multiple_add_button');
+  var multiple_option_input_wrapper = $('.objective_multiple_option_wrapper');
+
+  $(multipleOptionAddButton).click(function(){
+    var y = 0;
+    $('.objMultipleOption').each(function(){
+      y += 1;
+    });
+    if(y < MaxField){
+      y++;
+      var multiple_option_input_fieldHTML = '<div class="form-check"><input type="checkbox" class="form-check-input ObjMultipleCheckOption form-check-inline" name="objective_multiple_answer[]" value='+y+'><input type="text" class="objective_single_option objMultipleOption form-check-inline" name="objective_multiple_option_values[]" required/><a href="javascript:void(0);" class="objective_multiple_remove_button" title="Add field">-</a></div>';
+      $(multiple_option_input_wrapper).append(multiple_option_input_fieldHTML);
+    }else {
+      alert("maximum of 6 options can be given");
+    }
+  });
+
+  $("#questionForm").on('click', '.objective_multiple_remove_button', function(e){
+      e.preventDefault();
+      $(this).parent('div').remove(); //Remove field html
+  });
+
+  $('#question').on('keydown keyup', function(e){
+    var question_length = $(this).val().length;
+    $('#questionLength').text(question_length);
+  });
+
+  $('#subjective_answer').on('keydown keyup', function(e){
+    var answer_length = $(this).val().length;
+    $('#answerLength').text(answer_length);
+  });
+
+});

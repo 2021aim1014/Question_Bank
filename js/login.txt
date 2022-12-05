@@ -1,0 +1,81 @@
+$(document).ready(function(){
+
+  $('input[type=text]').keyup(function() {
+    var usr = $(this).val();
+    if ( usr.length < 5 ) {
+        $('#user_length').removeClass('valid').addClass('invalid');
+    } else {
+        $('#user_length').removeClass('invalid').addClass('valid');
+    }
+  });
+
+  $('input[type=text]').focus(function() {
+      // focus code here
+      $('#usr_info').show();
+  });
+
+  $('input[type=text]').blur(function() {
+      // blur code here
+      $('#usr_info').hide();
+  });
+
+  $('input[type=password]').keyup(function() {
+    // keyup event code here
+    var pswd = $(this).val();
+    //validate the length
+    if ( pswd.length < 8 ) {
+        $('#pswd_length').removeClass('valid').addClass('invalid');
+    } else {
+        $('#pswd_length').removeClass('invalid').addClass('valid');
+    }
+    //validate letter
+    if ( pswd.match(/[A-z]/) ) {
+        $('#pswd_letter').removeClass('invalid').addClass('valid');
+    } else {
+        $('#pswd_letter').removeClass('valid').addClass('invalid');
+    }
+
+    //validate capital letter
+    if ( pswd.match(/[A-Z]/) ) {
+        $('#pswd_capital').removeClass('invalid').addClass('valid');
+    } else {
+        $('#pswd_capital').removeClass('valid').addClass('invalid');
+    }
+
+    //validate number
+    if ( pswd.match(/\d/) ) {
+        $('#pswd_number').removeClass('invalid').addClass('valid');
+    } else {
+        $('#pswd_number').removeClass('valid').addClass('invalid');
+    }
+  });
+
+  $('input[type=password]').focus(function() {
+      // focus code here
+      $('#pswd_info').show();
+  });
+
+  $('input[type=password]').blur(function() {
+      // blur code here
+      $('#pswd_info').hide();
+  });
+
+  //check password field on submit button
+  $("#login_form").submit(function(e){
+    var usr_length_class = $('#user_length').attr('class');
+    var pswd_letter_class = $('#pswd_letter').attr('class');
+    var pswd_capital_class = $('#pswd_capital').attr('class');
+    var pswd_number_class = $('#pswd_number').attr('class');
+    var pswd_length_class = $('#pswd_length').attr('class');
+
+    if (usr_length_class == 'invalid') {
+      alert('The username length is less than required! Try different username.');
+      e.preventDefault(e);
+    } else if (pswd_letter_class == 'invalid' || pswd_capital_class == 'invalid' || pswd_number_class == 'invalid' ||  pswd_length_class == 'invalid') {
+      alert('The password entered is not strong! Try new password.');
+      e.preventDefault(e);
+    } else {
+      return;
+    }
+  });
+})

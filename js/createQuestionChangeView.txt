@@ -1,0 +1,41 @@
+$(document).ready(function(){
+
+  //based of selection of radio button, display appropriate block
+  $("input[type='radio']").click(function(){
+    var valueChoosen = $("input[name='question_type']:checked").val();
+    if (valueChoosen == 's') {
+      $('.subjective').show();
+      $('.objective_multiple').hide();
+      $('.objective_single').hide();
+
+      // add required attribute to input fields
+      $("[name='subjective_answer']").attr("required", true);
+      $(".objMultipleOption").attr("required", false);
+      $(".ObjMultipleCheckOption").attr("required", false);
+      $(".objSingleOption").attr("required", false);
+      $("[name='type_option']").attr("required", false);
+    }else if (valueChoosen == 'om') {
+      $('.subjective').hide();
+      $('.objective_multiple').show();
+      $('.objective_single').hide();
+
+      // add required attribute to input fields
+      $("[name='subjective_answer']").attr("required", false);
+      $(".objMultipleOption").attr("required", true);
+      //$(".ObjMultipleCheckOption").attr("required", true);
+      $(".objSingleOption").attr("required", false);
+      $("[name='type_option']").attr("required", false);
+    }else {
+      $('.subjective').hide();
+      $('.objective_multiple').hide();
+      $('.objective_single').show();
+
+      // add required attribute to input fields
+      $("[name='subjective_answer']").attr("required", false);
+      $(".objMultipleOption").attr("required", false);
+      $(".ObjMultipleCheckOption").attr("required", false);
+      $(".objSingleOption").attr("required", true);
+      $("[name='type_option']").attr("required", true);
+    }
+  });
+  });

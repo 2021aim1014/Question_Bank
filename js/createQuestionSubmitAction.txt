@@ -1,0 +1,83 @@
+$(document).ready(function(){
+$("#questionForm").submit(function(e){
+  var typeChoosen = $("input[name='question_type']:checked").val();
+  var idsArr = [];
+
+  var ques = $('#question').val().replace(/(\r\n|\n|\r|\s+)/g, '').length;
+  if(typeChoosen == 's'){
+    var ans = $('#subjective_answer').val().replace(/(\r\n|\n|\r|\s+)/g, '').length;
+    if(ques == 0 || ans == 0){
+      alert('Enter atleast one character in the input fields')
+      e.preventDefault(e);
+      return;
+    }
+  }
+
+  if (typeChoosen == 'om'){
+    $('input[type=checkbox]:checked').each(function(){
+      idsArr.push(this.value);
+    });
+
+    if(idsArr.length == 0){
+      alert('Choose atleast one correct option');
+      e.preventDefault(e);
+      return;
+    }
+  }
+
+  if (typeChoosen == 'om') {
+    var count=0;
+    var numberofChar = 0;
+    $('.objMultipleOption').each(function(){
+      count += 1;
+      numberofChar += $(this).val().length;
+      var optionLen = $(this).val().replace(/(\r\n|\n|\r|\s+)/g, '').length;
+      if(optionLen == 0 || ques == 0){
+        alert('Enter atleast one character in the input fields')
+        e.preventDefault(e);
+        window.stop();
+      }
+    });
+    if(count == 1){
+      alert('Create more than one options.');
+      e.preventDefault(e);
+      return;
+    } else if (count == idsArr.length) {
+      alert('Number of options and answers cannot be same. Create more options.');
+      e.preventDefault(e);
+      return;
+    } else if(numberofChar >= 170){
+      var excess = numberofChar-170;
+      alert('Please remove '+excess+' characters from options.');
+      e.preventDefault(e);
+      return;
+    }
+  }
+
+  if (typeChoosen == 'os') {
+    var count=0;
+    var numberofChar = 0;
+    $('.objSingleOption').each(function(){
+      count += 1;
+      numberofChar += $(this).val().length;
+      var optionLen = $(this).val().replace(/(\r\n|\n|\r|\s+)/g, '').length;
+      if(optionLen == 0 || ques == 0){
+        alert('Enter atleast one character in the input fields')
+        e.preventDefault(e);
+        window.stop();
+      }
+    });
+    if(count == 1){
+      alert('Create more than one options.');
+      e.preventDefault(e);
+      return;
+    } else if(numberofChar >= 170){
+      var excess = numberofChar-170;
+      alert('Please remove '+excess+' characters from options.');
+      e.preventDefault(e);
+      return;
+    }
+  }
+});
+
+});
